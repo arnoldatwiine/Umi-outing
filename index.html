@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Day Out | Family Resort Rwobuyenje</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="hero">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <span class="hero-label">A SPECIAL CLASS CELEBRATION</span>
+        <h1>DPPM CLASS DAY OUT</h1>
+        <div class="gold-line"></div>
+        <h2>Family Resort, Rwobuyenje</h2>
+        <p>Good Friends • Great Food • Beautiful Memories</p>
+        <span class="organizer">BEST OF THE DAY</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="welcome">
+      <span class="section-tag">LET'S MAKE MEMORIES</span>
+      <h2>Our Day, Our Memories</h2>
+      <p>
+        A special opportunity to come together, relax, enjoy good food
+        and create memorieS.
+      </p>
+    </section>
+
+    <section class="dashboard">
+      <div class="stat-card">
+        <span>Total Contributors</span>
+        <h2 id="totalContributors">0</h2>
+      </div>
+
+      <div class="stat-card">
+        <span>Main Payments</span>
+        <h2 id="mainPayments">UGX 0</h2>
+      </div>
+
+      <div class="stat-card">
+        <span>Other Contributions</span>
+        <h2 id="otherContributions">UGX 0</h2>
+      </div>
+
+      <div class="stat-card highlight">
+        <span>Grand Total Collected</span>
+        <h2 id="grandTotal">UGX 0</h2>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <span class="section-tag">JOIN THE CELEBRATION</span>
+          <h2>Register Your Contribution</h2>
+        </div>
+      </div>
+
+      <form id="contributorForm">
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="mainPayment">Main Money Paid</label>
+          <select id="mainPayment" required>
+            <option value="35000">UGX 35,000</option>
+            <option value="30000">UGX 30,000</option>
+            <option value="0">Not yet paid</option>
+            <option value="other">Other amount</option>
+          </select>
+        </div>
+
+        <div class="form-group hidden" id="customPaymentGroup">
+          <label for="customPayment">Enter Other Main Payment (UGX)</label>
+          <input type="number" id="customPayment" min="0" placeholder="Enter amount">
+        </div>
+
+        <div class="form-group">
+          <label for="otherContribution">Other Contribution (UGX)</label>
+          <input type="number" id="otherContribution" min="0" value="0" placeholder="Enter additional contribution">
+        </div>
+
+        <div class="form-group">
+          <label for="meal">Meal Choice</label>
+          <select id="meal" required>
+            <option value="">Select your preferred meal</option>
+            <option value="Lipwizard of buffet">Lipwizard of buffet</option>
+            <option value="Chips + Pork">Chips + Pork</option>
+            <option value="Chips + Chicken">Chips + Chicken</option>
+            <option value="Chips + Goat">Chips + Goat</option>
+            <option value="Fish + Chips">Fish + Chips</option>
+          </select>
+        </div>
+
+        <button type="submit" id="submitButton" class="primary-btn">
+          Add Contributor
+        </button>
+
+        <button type="button" id="cancelEdit" class="secondary-btn hidden">
+          Cancel Editing
+        </button>
+
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <span class="section-tag">MEAL ARRANGEMENTS</span>
+          <h2>Meal Selection Summary</h2>
+        </div>
+      </div>
+
+      <div id="mealSummary" class="meal-grid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="table-heading">
+        <div>
+          <span class="section-tag">CONTRIBUTION RECORDS</span>
+          <h2>Class Contributors</h2>
+        </div>
+
+        <input type="search" id="searchInput" placeholder="Search name...">
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Name</th>
+              <th>Main Payment</th>
+              <th>Other Contribution</th>
+              <th>Meal to Have</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="contributorsTable">
+          </tbody>
+        </table>
+      </div>
+
+      <div id="emptyMessage" class="empty-message">
+        No contributors have been registered yet.
+      </div>
+    </section>
+
+    <section class="panel tools-panel">
+      <span class="section-tag">MANAGE RECORDS</span>
+      <h2>Download & Backup</h2>
+
+      <div class="tools">
+        <button id="downloadCSV" class="tool-btn">Download CSV</button>
+        <button id="backupJSON" class="tool-btn">Backup Records</button>
+
+        <label for="restoreJSON" class="tool-btn upload-btn">
+          Restore Backup
+        </label>
+
+        <input type="file" id="restoreJSON" accept=".json" hidden>
+      </div>
+
+      <p class="backup-note">
+        Keep a backup of your records regularly. Records are saved in
+        this browser on this device.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <h3>CLASS DAY OUT</h3>
+    <p>Good Friends • Great Food • Beautiful Memories</p>
+    <p>Organised by Arnold Atwiine</p>
+    <small>© 2026 Class Day Out. All rights reserved.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
