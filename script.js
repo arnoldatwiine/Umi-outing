@@ -140,7 +140,7 @@ function renderDashboard() {
 
 function renderMeals() {
   const meals = [
-    "Lipwizard of buffet",
+    "Buffet",
     "Chips + Pork",
     "Chips + Chicken",
     "Chips + Goat",
