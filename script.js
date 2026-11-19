@@ -1,3 +1,4 @@
+
 const STORAGE_KEY = "familyResortContributors";
 
 let contributors = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -21,6 +22,7 @@ function saveRecords() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(contributors));
 }
 
+// Show or hide custom payment field
 mainPaymentInput.addEventListener("change", () => {
   customPaymentGroup.classList.toggle(
     "hidden",
@@ -32,6 +34,7 @@ mainPaymentInput.addEventListener("change", () => {
   }
 });
 
+// Get main payment amount
 function getMainPayment() {
   if (mainPaymentInput.value === "other") {
     return Number(customPaymentInput.value);
@@ -40,6 +43,7 @@ function getMainPayment() {
   return Number(mainPaymentInput.value);
 }
 
+// Register or update contributor
 form.addEventListener("submit", event => {
   event.preventDefault();
 
@@ -108,6 +112,7 @@ form.addEventListener("submit", event => {
   renderAll();
 });
 
+// Cancel editing
 document.getElementById("cancelEdit").addEventListener("click", () => {
   editingId = null;
   form.reset();
@@ -118,6 +123,7 @@ document.getElementById("cancelEdit").addEventListener("click", () => {
   document.getElementById("cancelEdit").classList.add("hidden");
 });
 
+// Financial dashboard
 function renderDashboard() {
   const total = contributors.length;
 
@@ -138,6 +144,7 @@ function renderDashboard() {
     money(mainTotal + otherTotal);
 }
 
+// Meal selection summary
 function renderMeals() {
   const meals = [
     "Buffet",
@@ -172,6 +179,7 @@ function renderMeals() {
   });
 }
 
+// Contributor table and search
 function renderTable() {
   table.innerHTML = "";
 
@@ -220,6 +228,7 @@ function renderTable() {
   });
 }
 
+// Edit contributor
 function editContributor(id) {
   const person = contributors.find(item => item.id === id);
   if (!person) return;
@@ -248,6 +257,7 @@ function editContributor(id) {
   });
 }
 
+// Delete contributor
 function deleteContributor(id) {
   const person = contributors.find(item => item.id === id);
   if (!person) return;
@@ -259,6 +269,7 @@ function deleteContributor(id) {
       editingId = null;
       form.reset();
       customPaymentGroup.classList.add("hidden");
+      otherContributionInput.value = "0";
       document.getElementById("submitButton").textContent = "Add Contributor";
       document.getElementById("cancelEdit").classList.add("hidden");
     }
@@ -268,14 +279,17 @@ function deleteContributor(id) {
   }
 }
 
+// Search
 searchInput.addEventListener("input", renderTable);
 
+// Refresh all sections
 function renderAll() {
   renderDashboard();
   renderMeals();
   renderTable();
 }
 
+// Download CSV
 document.getElementById("downloadCSV").addEventListener("click", () => {
   if (contributors.length === 0) {
     alert("There are no records to download.");
@@ -308,6 +322,7 @@ document.getElementById("downloadCSV").addEventListener("click", () => {
   downloadFile(blob, "class-day-out-contributors.csv");
 });
 
+// Backup records as JSON
 document.getElementById("backupJSON").addEventListener("click", () => {
   const blob = new Blob(
     [JSON.stringify(contributors, null, 2)],
@@ -317,6 +332,7 @@ document.getElementById("backupJSON").addEventListener("click", () => {
   downloadFile(blob, "class-day-out-backup.json");
 });
 
+// Restore JSON backup
 document.getElementById("restoreJSON").addEventListener("change", event => {
   const file = event.target.files[0];
   if (!file) return;
@@ -370,6 +386,7 @@ document.getElementById("restoreJSON").addEventListener("change", event => {
   reader.readAsText(file);
 });
 
+// Download helper
 function downloadFile(blob, filename) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -380,7 +397,8 @@ function downloadFile(blob, filename) {
   link.click();
   link.remove();
 
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// Initial display
 renderAll();
